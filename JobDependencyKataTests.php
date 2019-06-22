@@ -19,6 +19,6 @@ final class JobDependencyKataTests extends TestCase
             "a" => "",
         );
 
-        $this->assertSame("a", orderList($jobs));
+        $this->assertSame(["a"], orderList($jobs));
      }
 }
