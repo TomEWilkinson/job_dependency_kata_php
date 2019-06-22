@@ -58,6 +58,6 @@ final class JobDependencyKataTests extends TestCase
         );
 
         $orderedList = orderList($jobs);
-        $this->assertTrue(array_search('c', $jobs) < array_search('b', $jobs));
+        $this->assertTrue(array_search('c', $orderedList) < array_search('b', $orderedList));
     }
 }
