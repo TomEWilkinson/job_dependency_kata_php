@@ -7,12 +7,17 @@
  * @param string $job
  * @return void
  */
-function orderList($job) {
+function orderList($jobs) {
 
-    if(!$job)
+    if(!$jobs)
     {
         return "";
     }
 
-    return $job;
+    $orderedList = [];
+    foreach ($jobs as $job => $dependency) {
+       array_push($orderedList, $job);
+    }
+
+    return $orderedList;
 }
