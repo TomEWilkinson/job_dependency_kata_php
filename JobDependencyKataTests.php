@@ -102,4 +102,26 @@ final class JobDependencyKataTests extends TestCase
 
         $orderedList = orderList($jobs);
     }
+
+    /** @test 
+     * Jobs can't have circle Dependencies
+     * this is test to check an error is thrown when this is the case
+     */
+    public function TestMultipleCircleDependency(): void
+    {
+        $jobs = array(
+            "a" => "",
+            "b" => "c",
+            "c" => "f",
+            "d" => "a",
+            "e" => "",
+            "f" => "b"
+        );
+
+        $this->expectException("Exception");
+        $this->expectExceptionCode(101);
+        $this->expectExceptionMessage("Jobs Cannot cause a cirlce depdency");
+
+        $orderedList = orderList($jobs);
+    }
 }
