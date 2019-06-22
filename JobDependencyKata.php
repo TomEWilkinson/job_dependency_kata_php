@@ -31,7 +31,10 @@ function orderList($jobs)
             array_splice($orderedList, array_search($dependencyList[$job], $orderedList), 0, $job);
             //there's potential for a circle dependency if the job is in the list
             //check for that here
-            circleDependencyCheck($dependencyList, $dependencyList[$job], $dependency);
+            if (circleDependencyCheck($dependencyList, $dependencyList[$job], $dependency)) {
+                throw new Exception('Jobs Cannot cause a cirlce depdency', 101);
+            }
+
             continue;
         }
         //if a job has no dependecies push it onto the list
@@ -42,7 +45,7 @@ function orderList($jobs)
 }
 
 /**
- * a recucsive function to check for a circle dependency
+ * a recursive function to check for a circle dependency
  *
  * @param array $dependencyList
  * @param string $nextDependency
@@ -54,7 +57,7 @@ function circleDependencyCheck($dependencyList, $nextDependency, $originalDepend
 
     //if the orginal depency equals the next dependency we have a circle
     if (isset($dependencyList[$nextDependency]) && $originalDependency ==  $dependencyList[$nextDependency]) {
-        throw new Exception('Jobs Cannot cause a cirlce depdency', 101);
+        return true;
     }
 
     //if it's not undefined the chain of dependencies continues
