@@ -18,6 +18,10 @@ function orderList($jobs)
     $dependencyList = [];
     foreach ($jobs as $job => $dependency) {
 
+        if ($dependency == $job) {
+            throw new Exception('Jobs cannot depend on themselves', 100);
+        }
+
         if ($dependency) {
             $dependencyList[$dependency] = $job;
         }
