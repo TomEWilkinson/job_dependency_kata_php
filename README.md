@@ -1,1 +1,4 @@
-# job dependency code kata written in php
+Job Dependency Code Kata
+
+- `composer install` - install depencies
+- `composer test` - run jest tests
