@@ -3,6 +3,7 @@
 include 'JobDependencyKata.php';
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Exception;
 
 final class JobDependencyKataTests extends TestCase
 {
@@ -81,5 +82,24 @@ final class JobDependencyKataTests extends TestCase
         $this->assertTrue(array_search('c', $orderedList) < array_search('b', $orderedList));
         $this->assertTrue(array_search('b', $orderedList) < array_search('e', $orderedList));
         $this->assertTrue(array_search('a', $orderedList) < array_search('d', $orderedList));
+    }
+
+    /** @test 
+     * Jobs should not depend on themselves 
+     * this is test to check an error is thrown when this is the case
+     */
+    public function TestSingleCircleDependency(): void
+    {
+        $jobs = array(
+            "a" => "",
+            "b" => "",
+            "c" => "c",
+        );
+
+        $this->expectException("Exception");
+        $this->expectExceptionCode(100);
+        $this->expectExceptionMessage("Jobs cannot depend on themselves");
+
+        $orderedList = orderList($jobs);
     }
 }
