@@ -11,4 +11,14 @@ final class JobDependencyKataTests extends TestCase
     {
         $this->assertSame("", orderList(""));
     }
+
+     /** @test */
+     public function TestSingleJob(): void
+     {
+        $jobs = array(
+            "a" => "",
+        );
+
+        $this->assertSame("a", orderList($jobs));
+     }
 }
