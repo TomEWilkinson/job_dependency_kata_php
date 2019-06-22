@@ -44,4 +44,20 @@ final class JobDependencyKataTests extends TestCase
         $this->assertContains("b", $orderedList);
         $this->assertContains("c", $orderedList);
     }
+
+    /** @test 
+     * passing in a key value array containing 3 jobs with one that has a dependency
+     * expects array containing the jobs passed in
+     */
+    public function TestMultipleJobsWithSingleDependency(): void
+    {
+        $jobs = array(
+            "a" => "",
+            "b" => "c",
+            "c" => "",
+        );
+
+        $orderedList = orderList($jobs);
+        $this->assertTrue(array_search('c', $jobs) < array_search('b', $jobs));
+    }
 }
