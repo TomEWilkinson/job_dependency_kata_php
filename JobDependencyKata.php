@@ -9,7 +9,7 @@
  */
 function orderList($jobs)
 {
-
+    //if there's no jobs exit here
     if (!$jobs) {
         return "";
     }
@@ -21,16 +21,20 @@ function orderList($jobs)
         if ($dependency == $job) {
             throw new Exception('Jobs cannot depend on themselves', 100);
         }
-
+        //if there's a dependency add it to the list of dependencies to keep track of 
         if ($dependency) {
             $dependencyList[$dependency] = $job;
         }
 
+        //if the job has something that depends on it insert it before it's dependency
         if (isset($dependencyList[$job])) {
             array_splice($orderedList, array_search($dependencyList[$job], $orderedList), 0, $job);
+            //there's potential for a circle dependency if the job is in the list
+            //check for that here
             circleDependencyCheck($dependencyList, $dependencyList[$job], $dependency);
             continue;
         }
+        //if a job has no dependecies push it onto the list
         array_push($orderedList, $job);
     }
 
