@@ -62,8 +62,8 @@ function circleDependencyCheck($dependencyList, $nextDependency, $originalDepend
 
     //if it's not undefined the chain of dependencies continues
     if (isset($dependencyList[$nextDependency])) {
-        circleDependencyCheck($dependencyList, $dependencyList[$nextDependency], $originalDependency);
-    } else {
-        return false;
+        return circleDependencyCheck($dependencyList, $dependencyList[$nextDependency], $originalDependency);
     }
+
+    return false;
 }
