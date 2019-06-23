@@ -12,7 +12,7 @@ final class JobDependencyKataTests extends TestCase
      */
     public function TestEmptyString(): void
     {
-        $this->assertSame("", orderList(""));
+        $this->assertSame([], orderList([]));
     }
 
     /** @test 

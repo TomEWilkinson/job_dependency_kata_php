@@ -5,13 +5,13 @@
  * function to return an ordered list
  *
  * @param string $job
- * @return void
+ * @return array
  */
 function orderList($jobs)
 {
     //if there's no jobs exit here
     if (!$jobs) {
-        return "";
+        return [];
     }
 
     $orderedList = [];
