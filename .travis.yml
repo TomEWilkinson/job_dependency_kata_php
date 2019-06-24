@@ -1,1 +1,12 @@
-language: php
+language:
+  - php
+
+script:
+  - composer test
+  - vendor/bin/phpunit --coverage-clover=coverage.xml JobDependencyKataTests.php
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+before_script:
+  - composer install
