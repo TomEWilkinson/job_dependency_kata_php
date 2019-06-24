@@ -9,3 +9,5 @@ ehthumbs.db
 Thumbs.db
 
 vendor
+coverage.xml
+.phpunit.result.cache
